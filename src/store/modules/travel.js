@@ -36,13 +36,22 @@ const actions = {
     },
     deletePlace({commit}, id){
         commit('deletePlace', id)
-    }
+    },
+    updatePlace({ commit }, u) {
+        commit("updatePlace", u);
+    },
 }
 
 const mutations = {
     getPlaces: (state, data) => (state.places = data),
     addPlace: (state, data) => state.places.push(data),
     deletePlace: (state, id) => (state.places = state.places.filter(p => p.id !== id)),
+    updatePlace: (state, data) => {
+        const index = state.places.findIndex(t => t.id === data.id)
+        if (index !== -1) {
+          state.places.splice(index, 1, data);
+        }
+    }
 }
 
 export default {
